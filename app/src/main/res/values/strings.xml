@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">My Reading Journal</string>
+    <string name="img_start_screen_description">Stacked books with words saying \'Book Journal Reading Log\'</string>
+    <string name="txt_welcome">Welcome to My Reading Journal, a place where you can rate and keep
+        track of the books you\'ve read!  To get started, fill out the fields below.</string>
+    <string name="edt_title_hint">e.g., Taming of the Shrew</string>
+    <string name="edt_author_hint">e.g., Shakespeare, William</string>
+    <string name="edt_isbn_hint">Enter Book\'s 10-digit ISBN</string>
+    <string name="txt_title_prompt">Enter the book\'s title (omit initial articles, e.g. \"The\" or \"A\"):</string>
+    <string name="txt_author_prompt">Enter the name of the book\'s author (Lastname, Firstname):</string>
+    <string name="txt_isbn_prompt">Enter the book\'s 10-digit ISBN:</string>
+    <string name="txt_radGroup_prompt">Select the book\'s format:</string>
+    <string name="rad_physical">Physical/Traditional Book</string>
+    <string name="rad_ebook">E-book (e.g., Kindle)</string>
+    <string name="rad_audiobook">Audiobook (e.g., Audible)</string>
+    <string name="txt_overall_rating_prompt">Select your overall rating of the book:</string>
+    <string name="txt_user_thoughts_prompt">Enter any thoughts or ideas you enjoyed (or didn\'t enjoy) about the book:</string>
+    <string name="edt_thoughts_hint">Enter your thoughts about the book</string>
+    <string name="txt_reading_reason_prompt">Select your reason for reading the book:</string>
+    <string name="chk_self_improvement">Self-Improvement</string>
+    <string name="btn_clear_entries">Clear Entries</string>
+    <string name="btn_submit">Submit</string>
+    <string name="chk_reduce_stress">Reduce Stress</string>
+    <string name="chk_knowledge_enhancement">Knowledge Enhancement</string>
+    <string name="chk_entertainment">Entertainment</string>
+    <string name="chk_required_reading">Required (for school or work)</string>
+    <string name="txt_genre_prompt">Select the book\'s genre from the dropdown menu:</string>
+    <string name="txt_done_reviewing_prompt">Done entering books? Click the button below to see the books you\'ve rated!</string>
+    <string name="btn_my_ratings">See My Ratings</string>
+    <string-array name="book_genre">
+        <item>Select A Genre</item>
+        <item>Biography/Autobiography</item>
+        <item>Drama</item>
+        <item>Fable</item>
+        <item>Fairy Tale</item>
+        <item>Fantasy</item>
+        <item>Historical Fiction</item>
+        <item>Horror</item>
+        <item>Humor</item>
+        <item>Mystery</item>
+        <item>Play/Script</item>
+        <item>Poetry</item>
+        <item>Science Fiction</item>
+        <item>Self Help</item>
+    </string-array>
+</resources>
