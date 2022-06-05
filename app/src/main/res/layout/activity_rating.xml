@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".RatingActivity">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/pacifico"
+            android:text="@string/txt_rating_instructions"
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/lost_in_thought" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/pacifico"
+            android:text="@string/txt_title_prompt"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edt_title_entry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/gainsboro"
+            android:hint="@string/edt_title_hint" />
+
+        <!-- Entry for the book's author -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/pacifico"
+            android:text="@string/txt_author_prompt"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edt_author_entry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/gainsboro"
+            android:hint="@string/edt_author_hint" />
+
+        <!-- Entry for recording the book's 10-digit ISBN (in case you borrowed the book from a
+         library and you want to purchase the same book for your personal library.  -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/pacifico"
+            android:text="@string/txt_isbn_prompt"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edt_isbn_entry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/gainsboro"
+            android:hint="@string/edt_isbn_hint" />
+
+        <!-- RadioGroup for selecting the book's format -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/pacifico"
+            android:text="@string/txt_radGroup_prompt"
+            android:textColor="@color/black" />
+
+        <RadioGroup
+            android:id="@+id/radGroup_book_format"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp" >
+
+            <RadioButton
+                android:id="@+id/rad_physical_format"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rad_physical" />
+
+            <RadioButton
+                android:id="@+id/rad_ebook_format"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rad_ebook" />
+
+            <RadioButton
+                android:id="@+id/rad_audiobook_format"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rad_audiobook" />
+        </RadioGroup>
+
+        <!-- Checkboxes for selecting the reason(s) for reading the book -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/pacifico"
+            android:text="@string/txt_reading_reason_prompt"
+            android:textColor="@color/black" />
+
+        <CheckBox
+            android:id="@+id/chk_self_improvement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/chk_self_improvement" />
+
+        <CheckBox
+            android:id="@+id/chk_reduce_stress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/chk_reduce_stress" />
+
+        <CheckBox
+            android:id="@+id/chk_knowledge_enhancement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/chk_knowledge_enhancement" />
+
+        <CheckBox
+            android:id="@+id/chk_entertainment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/chk_entertainment" />
+
+        <CheckBox
+            android:id="@+id/chk_required_reading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/chk_required_reading" />
+
+        <!-- Spinner for selecting the book's genre -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/pacifico"
+            android:text="@string/txt_genre_prompt"
+            android:textColor="@color/black" />
+
+        <Spinner
+            android:id="@+id/spn_genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:entries="@array/book_genre"
+            android:background="@color/gainsboro" />
+
+        <!-- Section for rating the book -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/pacifico"
+            android:text="@string/txt_overall_rating_prompt"
+            android:textColor="@color/black" />
+
+        <RatingBar
+            android:id="@+id/ratingBar_overall_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:numStars="5"
+            android:rating="2.5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/pacifico"
+            android:text="@string/txt_user_thoughts_prompt"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edt_user_thoughts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="@string/edt_thoughts_hint" />
+
+        <LinearLayout
+            android:id="@+id/btn_linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center" >
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="@color/forestGreen"
+                android:text="@string/btn_submit" />
+
+            <Button
+                android:id="@+id/btn_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:backgroundTint="@color/fireBrick"
+                android:text="@string/btn_clear_entries" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

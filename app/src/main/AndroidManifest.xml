@@ -14,6 +14,12 @@
         android:theme="@style/Theme.FinalProjMcGrath"
         tools:targetApi="31">
         <activity
+            android:name=".MyRatingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RatingActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
