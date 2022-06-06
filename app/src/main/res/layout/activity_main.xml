@@ -45,6 +45,7 @@ Due:    08 June 2022
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center">
 
             <Button
@@ -63,7 +64,7 @@ Due:    08 June 2022
 
         </LinearLayout>
 
-        <!-- Section for seeing how many books you've rated so far -->
+        <!-- Section for displaying how many books you've rated so far -->
 
         <TextView
             android:layout_width="wrap_content"

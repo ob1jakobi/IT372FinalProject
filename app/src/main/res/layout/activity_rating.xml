@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--
+Name:   Jake McGrath
+Proj:   Final Project
+Due:    08 June 2022
+-->
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,9 +16,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/floralWhite"
         tools:context=".RatingActivity">
 
-
+        <!-- Instructions and image -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,6 +35,8 @@
             android:layout_height="200dp"
             android:layout_marginTop="20dp"
             android:src="@drawable/lost_in_thought" />
+
+        <!-- Start of entries (Title, Author, etc) -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -86,6 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:inputType="number"
             android:background="@color/gainsboro"
             android:hint="@string/edt_isbn_hint" />
 
@@ -207,7 +216,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:numStars="5"
-            android:rating="2.5" />
+            android:rating="0.0" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -224,6 +233,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:background="@color/gainsboro"
             android:hint="@string/edt_thoughts_hint" />
 
         <LinearLayout

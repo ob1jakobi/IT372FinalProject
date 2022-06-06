@@ -14,7 +14,8 @@
     <string name="rad_ebook">E-book (e.g., Kindle)</string>
     <string name="rad_audiobook">Audiobook (e.g., Audible)</string>
     <string name="txt_overall_rating_prompt">Select your overall rating of the book:</string>
-    <string name="txt_user_thoughts_prompt">Enter any thoughts or ideas you enjoyed (or didn\'t enjoy) about the book:</string>
+    <string name="txt_user_thoughts_prompt">Enter any thoughts or ideas you enjoyed (or didn\'t enjoy)
+        about the book (optional):</string>
     <string name="edt_thoughts_hint">Enter your thoughts about the book</string>
     <string name="txt_reading_reason_prompt">Select your reason for reading the book:</string>
     <string name="chk_self_improvement">Self-Improvement</string>
