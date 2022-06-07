@@ -6,7 +6,7 @@
     <string name="edt_title_hint">e.g., Taming of the Shrew</string>
     <string name="edt_author_hint">e.g., Shakespeare, William</string>
     <string name="edt_isbn_hint">Enter Book\'s 10-digit ISBN</string>
-    <string name="txt_title_prompt">Enter the book\'s title (omit initial articles, e.g. \"The\" or \"A\"):</string>
+    <string name="txt_title_prompt">Enter the book\'s title:</string>
     <string name="txt_author_prompt">Enter the name of the book\'s author (Lastname, Firstname):</string>
     <string name="txt_isbn_prompt">Enter the book\'s 10-digit ISBN:</string>
     <string name="txt_radGroup_prompt">Select the book\'s format:</string>
@@ -30,6 +30,11 @@
     <string name="btn_new_rating">New Rating</string>
     <string name="txt_books_rated">Books rated so far:</string>
     <string name="txt_rating_instructions">Complete the form below to add a book rating to your journal.</string>
+    <string name="btn_rate_another">Rate Another Book</string>
+    <string name="txt_want_to_delete">Want to remove a rating? Write the book\'s ISBN in the field below and click the red button.</string>
+    <string name="btn_delete_rating">Delete Rating</string>
+    <string name="edt_delete_by_isbn_hint">Enter ISBN to Delete Rating</string>
+    <string name="btn_see_my_ratings">See My Ratings!</string>
     <string-array name="book_genre">
         <item>Select A Genre</item>
         <item>Biography/Autobiography</item>

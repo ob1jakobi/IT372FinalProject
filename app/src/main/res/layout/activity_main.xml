@@ -64,25 +64,6 @@ Due:    08 June 2022
 
         </LinearLayout>
 
-        <!-- Section for displaying how many books you've rated so far -->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:fontFamily="@font/pacifico"
-            android:text="@string/txt_books_rated" />
-
-        <TextView
-            android:id="@+id/txt_number_of_books_rated"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:background="@color/gainsboro"
-            android:text="" />
-
     </LinearLayout>
 
 </ScrollView>

@@ -1,6 +1,11 @@
 package it372.finalprojmcgrath;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -37,18 +42,6 @@ public class RatingActivity extends AppCompatActivity {
     private Spinner spnGenre;
     private RatingBar ratingBar;
     private EditText edtUsersThoughts;
-    private Button btnSubmit;
-    private Button btnClear;
-
-    // Fields for SQL handling
-    private String title;
-    private String author;
-    private int ISBN;
-    private String format;
-    private ArrayList<String> readingReasons;
-    private String genre;
-    private int rating;
-    private String thoughts;
 
 
     @Override
@@ -56,7 +49,6 @@ public class RatingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating);
 
-        // Initialize the fields
         // Initialize first group of EditText fields:
         edtTitle = findViewById(R.id.edt_title_entry);
         edtAuthor = findViewById(R.id.edt_author_entry);
@@ -78,16 +70,12 @@ public class RatingActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar_overall_rating);
         // Initialize the EditText for the user's thoughts:
         edtUsersThoughts = findViewById(R.id.edt_user_thoughts);
-        // Initialize the two Buttons:
-        btnSubmit = findViewById(R.id.btn_submit);
-        btnClear = findViewById(R.id.btn_clear);
 
         // Ensure rotation doesn't destroy the information entered by the user:
         if (savedInstanceState != null) {
             edtTitle.setText(savedInstanceState.getString("title"));
             edtAuthor.setText(savedInstanceState.getString("author"));
-            int test = savedInstanceState.getInt("isbn");
-            edtISBN.setText(Integer.toString(test));
+            edtISBN.setText(savedInstanceState.getString("isbn"));
             // restore RadioButton
             String tempFormat = savedInstanceState.getString("format");
             switch (tempFormat) {
@@ -135,24 +123,97 @@ public class RatingActivity extends AppCompatActivity {
             // restore user's thoughts
             edtUsersThoughts.setText(savedInstanceState.getString("thoughts"));
         }
+    }
 
-        // Submit button functionality:
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (allFieldsComplete()) {
-                    // TODO: enter information into SQLite database
+    /**
+     * Function that clears all of the entries/fields on the rating activity.
+     * @param view
+     */
+    public void clearEntries(View view) {
+        // clear title, author, and isbn
+        edtTitle.getText().clear();
+        edtAuthor.getText().clear();
+        edtISBN.getText().clear();
+        // clear RadioGroup
+        radGroup.clearCheck();
+        // clear reasons for reading CheckBoxes
+        if (chkSelfImprovement.isChecked()) {
+            chkSelfImprovement.toggle();
+        } if (chkStressReduction.isChecked()) {
+            chkStressReduction.toggle();
+        } if (chkKnowledgeEnhancement.isChecked()) {
+            chkKnowledgeEnhancement.toggle();
+        } if (chkEntertainment.isChecked()) {
+            chkEntertainment.toggle();
+        } if (chkRequiredReading.isChecked()) {
+            chkRequiredReading.toggle();
+        }
+        // reset genre Spinner
+        spnGenre.setSelection(0);
+        // reset RatingBar
+        ratingBar.setRating(0);
+        // reset thoughts EditText
+        edtUsersThoughts.getText().clear();
+    }
+
+    /**
+     * Function that saves the new rating as a record in a database.
+     * @param view
+     */
+    public void submitRating(View view) {
+        if (allFieldsComplete()) {
+            // Get Title, Author, ISBN
+            String title = edtTitle.getText().toString();
+            String author = edtAuthor.getText().toString();
+            String ISBN = edtISBN.getText().toString();
+            // Get the book's format
+            String format = "";
+            if (radBook.isChecked()) {
+                format = "Book";
+            } else if (radEbook.isChecked()) {
+                format = "eBook";
+            } else {
+                format = "Audiobook";
+            }
+            // Get the reasons for reading
+            ArrayList<String> rReasons = new ArrayList<>();
+            if (chkSelfImprovement.isChecked()) {
+                rReasons.add("Self Improvement");
+            } if (chkStressReduction.isChecked()) {
+                rReasons.add("Stress Reduction");
+            } if (chkKnowledgeEnhancement.isChecked()) {
+                rReasons.add("Knowledge Enhancement");
+            } if (chkEntertainment.isChecked()) {
+                rReasons.add("Entertainment");
+            } if (chkRequiredReading.isChecked()) {
+                rReasons.add("Required Reading");
+            }
+            StringBuilder allReadingReasons = new StringBuilder();
+            for (int i = 0; i < rReasons.size(); i++) {
+                if (i == rReasons.size() - 1) {
+                    allReadingReasons.append(rReasons.get(i));
+                } else {
+                    allReadingReasons.append(rReasons.get(i)).append(", ");
                 }
             }
-        });
+            // Get the genre
+            String genre = spnGenre.getSelectedItem().toString();
+            // Get the rating
+            double rating = ratingBar.getRating();
+            // Get the user's thoughts
+            String thoughts = edtUsersThoughts.getText().toString();
 
-        btnClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO clear all entries
+            // Instantiate database and insert the new rating into the database
+            SQLiteOpenHelper dbh = new RatingsDBHelper(this);
+            try {
+                SQLiteDatabase db = dbh.getWritableDatabase();
+                RatingsDBHelper.insertNewRating(db, title, author, ISBN, format,
+                        allReadingReasons.toString(), genre, rating, thoughts);
+            } catch (SQLiteException e) {
+                Toast toast = Toast.makeText(this, e.toString(), Toast.LENGTH_LONG);
+                toast.show();
             }
-        });
-
+        }
     }
 
     @Override
@@ -162,7 +223,7 @@ public class RatingActivity extends AppCompatActivity {
         // save EditText entries for Title, Author and ISBN
         savedInstanceState.putString("title", edtTitle.getText().toString());
         savedInstanceState.putString("author", edtAuthor.getText().toString());
-        savedInstanceState.putInt("isbn", Integer.parseInt(edtISBN.getText().toString()));
+        savedInstanceState.putString("isbn", edtISBN.getText().toString());
 
         // Logic for capturing RadioButton contents
         String formatTemp;
@@ -194,7 +255,7 @@ public class RatingActivity extends AppCompatActivity {
         savedInstanceState.putString("genre", spnGenre.getSelectedItem().toString());
 
         // save RatingBar rating
-        savedInstanceState.putInt("rating", ratingBar.getNumStars());
+        savedInstanceState.putDouble("rating", ratingBar.getRating());
 
         // save EditText entry for user's thoughts
         savedInstanceState.putString("thoughts", edtUsersThoughts.getText().toString());
@@ -225,7 +286,8 @@ public class RatingActivity extends AppCompatActivity {
         } if (!radBook.isChecked() && !radEbook.isChecked() && !radAudiobook.isChecked()) {
             text += text.length() == 28 ? "book format." : ", book format";
         } if (!chkEntertainment.isChecked() && !chkKnowledgeEnhancement.isChecked()
-                && !chkStressReduction.isChecked() && !chkStressReduction.isChecked()) {
+                && !chkRequiredReading.isChecked() && !chkStressReduction.isChecked() &&
+                !chkSelfImprovement.isChecked()) {
             text += text.length() == 28 ? "reason for reading the book (at least one)" : ", reason for" +
                     " reading the book (at least one)";
         } if (spnGenre.getSelectedItem().toString().equalsIgnoreCase("select a genre")) {
@@ -236,9 +298,18 @@ public class RatingActivity extends AppCompatActivity {
             text = "Book Reviewed Submitted Successfully";
             flag = true;
         }
-        Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
         toast.show();
         return flag;
+    }
+
+    /**
+     * Navigates to the activity where the user can see their ratings.
+     * @param view
+     */
+    public void seeRatings(View view) {
+        Intent intent = new Intent(this, MyRatingsActivity.class);
+        startActivity(intent);
     }
 
 }
