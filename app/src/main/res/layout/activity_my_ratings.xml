@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
+<!--
+Name:   Jake McGrath
+Proj:   Final Project
+Due:    08 June 2022
+-->
+
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,6 +20,7 @@
         android:layout_gravity="center_horizontal"
         tools:context=".MyRatingsActivity">
 
+        <!-- displays the db's contents -->
         <TextView
             android:id="@+id/txt_rating_display"
             android:layout_width="wrap_content"
@@ -21,6 +29,7 @@
             android:layout_gravity="center"
             android:text="" />
 
+        <!-- displays the number of records in the db -->
         <TextView
             android:id="@+id/txt_num_of_books_rated"
             android:layout_width="wrap_content"
@@ -28,13 +37,14 @@
             android:layout_gravity="center"
             android:text="" />
 
-
+        <!-- Layout for all remaining Buttons, TextViews, and EditText widgets -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical" >
 
+            <!-- Layout for side-by-side buttons (New Rating & Refres) -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,8 +67,7 @@
 
             </LinearLayout>
 
-
-
+            <!-- Textview instructions on how to delete a rating, with EditText and Button for functionality -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
