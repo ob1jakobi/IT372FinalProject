@@ -118,8 +118,8 @@ public class RatingActivity extends AppCompatActivity {
                 spnGenre.setSelection(spinnerPosition);
             }
             // restore rating
-            int tempRating = savedInstanceState.getInt("rating");
-            ratingBar.setRating(tempRating);
+            double tempRating = savedInstanceState.getDouble("rating");
+            ratingBar.setRating((float) tempRating);
             // restore user's thoughts
             edtUsersThoughts.setText(savedInstanceState.getString("thoughts"));
         }

@@ -1,5 +1,6 @@
 package it372.finalprojmcgrath;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,13 +16,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+/**
+ * Name:    Jake McGrath
+ * Proj:    Final Project
+ * Due:     08 June 2022
+ */
 public class MyRatingsActivity extends AppCompatActivity {
     private TextView txtRatings;
     private TextView txtNumRatings;
     private Button btnRateAgain;
     private EditText edtISBN;
     private int index;
-
     // Database Fields
     SQLiteDatabase db;
     Cursor cursor;
@@ -64,10 +71,10 @@ public class MyRatingsActivity extends AppCompatActivity {
             String numBooks = String.format("Total # of Books Rated: %d", cursor.getCount());
             txtNumRatings.setText(numBooks);
 
-            // Display all of the books that have been rated
-            boolean flag = true;
-            cursor.moveToFirst();
-            StringBuilder tempRecord = new StringBuilder();
+            // Display all of the books that have been rated (stable)
+            boolean flag = true;        // Flag variable to start off strong
+            cursor.moveToFirst();       // ensure the cursor is on the first record
+            RecordList<String> records = new RecordList<>();    // stores/keeps iterated cursor records
             while (flag) {
                 String record = String.format("%s: %s | %s | %s | %s | %s | %s | %.1f | %s%n",
                         index,
@@ -79,23 +86,26 @@ public class MyRatingsActivity extends AppCompatActivity {
                         cursor.getString(5),
                         cursor.getDouble(6),
                         cursor.getString(7));
-                tempRecord.append(record);
-                txtRatings.setText(tempRecord.toString());
+                records.add(record);
+                txtRatings.setText(records.toString());     // displays the records held in tempRecord
                 index++;
                 cursor.moveToNext();
                 if (cursor.isAfterLast()) {
                     flag = false;
+                    records.clear();    // save space since the RecordList is no longer needed
                 }
             }
         } catch (SQLiteException e) {
-            Toast toast = Toast.makeText(this, e.toString(), Toast.LENGTH_LONG);
+            String msg = "something went wrong..." + e.toString();
+            Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
             toast.show();
         } catch (NullPointerException e) {
-            Toast toast = Toast.makeText(this, e.toString(), Toast.LENGTH_LONG);
+            String msg = "Something went wrong..." + e.toString();
+            Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
             toast.show();
         } catch (CursorIndexOutOfBoundsException e) {
-            String prompt = "You don't have any ratings. Please click 'Rate Another Book'.";
-            Toast toast = Toast.makeText(this, prompt, Toast.LENGTH_LONG);
+            String msg = "You don't have any ratings. Please click 'Rate Another Book'.";
+            Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
             toast.show();
         }
 
@@ -122,7 +132,8 @@ public class MyRatingsActivity extends AppCompatActivity {
             toast.show();
             index--;
         } catch (SQLiteException e) {
-            Toast toast = Toast.makeText(this, "something went wrong...", Toast.LENGTH_LONG);
+            String msg = "something went wrong..." + e.toString();
+            Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
             toast.show();
         }
 
@@ -135,5 +146,27 @@ public class MyRatingsActivity extends AppCompatActivity {
     public void refresh(View view) {
         Intent intent = new Intent(this, MyRatingsActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * Private class to store records iterated over by the cursor.
+     * @param <E>
+     */
+    private class RecordList<E> extends ArrayList {
+
+        /**
+         * Overridden so the TextView that displays the records can be easily iterated over in a
+         * format that is simple and easy to recognize.
+         * @return a <code>String</code> representation of each record from <cod>db</cod> storing
+         * the user's book ratings/reviews.
+         */
+        @Override
+        public String toString() {
+            StringBuilder result = new StringBuilder();
+            for (Object item: this) {
+                result.append(item);
+            }
+            return result.toString();
+        }
     }
 }

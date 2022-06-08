@@ -7,6 +7,14 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+/**
+ * Name:    Jake McGrath
+ * Proj:    Final Project
+ * Due:     08 June 2022
+ */
 public class RatingsDBHelper extends SQLiteOpenHelper {
 
     protected static final String DB_NAME = "BOOK_RATINGS.db";
@@ -30,7 +38,7 @@ public class RatingsDBHelper extends SQLiteOpenHelper {
      * Table-text schema for the MY_RATINGS table is as follows:
      * MY_RATINGS(TITLE, AUTHOR, ISBN, BOOK_FORMAT, READING_REASON, GENRE, RATING, THOUGHTS), where
      * ISBN is the primary key for the table.
-     * @param db
+     * @param db the <code>SQLiteDatabase</code> that will be used for creating a new table.
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -59,9 +67,15 @@ public class RatingsDBHelper extends SQLiteOpenHelper {
      * @param bookRating the <code>double</code> user's rating of the book
      * @param thoughts the <code>String</code> thoughts/remarks the user has for the book
      */
-    public static void insertNewRating(SQLiteDatabase db, String bookTitle, String bookAuthor, String bookISBN,
-                             String bookFormat, String readingReasons, String bookGenre,
-                             double bookRating, String thoughts) {
+    public static void insertNewRating(@NonNull SQLiteDatabase db, @NonNull String bookTitle, @NonNull String bookAuthor,
+                                       @NonNull String bookISBN, @NonNull String bookFormat,
+                                       @NonNull String readingReasons, @NonNull String bookGenre,
+                                       double bookRating, @Nullable String thoughts) {
+        // Ensures the entries that need info are not empty strings
+        if (bookTitle.isEmpty() || bookAuthor.isEmpty() || bookISBN.isEmpty() || bookFormat.isEmpty() ||
+        readingReasons.isEmpty() || bookGenre.isEmpty()) {
+            return;
+        }
         // Store values
         ContentValues values = new ContentValues();
         values.put(TITLE_COL, bookTitle);
@@ -81,7 +95,11 @@ public class RatingsDBHelper extends SQLiteOpenHelper {
      * @param db the <code>database</code> that will have the record removed from it.
      * @param ISBN the <code>String</code> representation of the 10-digit ISBN number.
      */
-    public static void deleteRating(SQLiteDatabase db, String ISBN) {
+    public static void deleteRating(@NonNull SQLiteDatabase db, @NonNull String ISBN) {
+        // Prevent deletion of all records in the db
+        if (ISBN.isEmpty()) {
+            return;
+        }
         db.delete(TABLE_NAME, ISBN_COL + " LIKE ?", new String[] {ISBN});
     }
 
@@ -91,4 +109,5 @@ public class RatingsDBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
+
 }
